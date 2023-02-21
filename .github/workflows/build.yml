@@ -52,7 +52,6 @@ jobs:
  
       - name: Commit and push build counter changes
         run: |
-          cd build-counter
           git config user.name "venkatsagiraju"
           git config user.email "venkat_sagiraju@trimble.com"
           git add $filePath
