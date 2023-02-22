@@ -3,7 +3,7 @@ name: Buildcounter
 on: push
  
 env:    
-TOKEN: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 
+  TOKEN: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 
 
   #BUILD_COUNTER_REPO: venkatsagiraju/Buildcounter
   #BUILD_COUNTER_BRANCH: Init
