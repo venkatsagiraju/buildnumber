@@ -17,8 +17,10 @@ jobs:
  
       - name: Clone build counter repo
         uses: actions/checkout@v2
-      - run: |
-         curl -H "Authorization: token ${TOKEN}" https://github.com/venkatsagiraju/Buildcounter/blob/Init/counter.txt 
-
- 
+        with:
+          repository: venkatsagiraju/Buildcounter
+          ref: Init
+      - name: Read file
+        run: |
+          cat counter.txt
      
