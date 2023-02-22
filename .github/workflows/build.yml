@@ -11,7 +11,7 @@ jobs:
       run: |
         $major = "2022"
         $minor = "99"
-        $patch = "9"
+        $patch = "99"
         $version = "$major.$minor.$patch"
         Write-Host "VERSION=$version" > version.txt
     - name: Trigger downstream workflow
