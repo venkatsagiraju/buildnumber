@@ -2,11 +2,13 @@ name: Buildcounter
  
 on: push
  
-env:
-  BUILD_COUNTER_REPO: venkatsagiraju/Buildcounter
-  BUILD_COUNTER_BRANCH: Init
-  BUILD_COUNTER_FILE: counter.txt
-  VERSION: 2022.4.3
+env:    
+TOKEN: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 
+
+  #BUILD_COUNTER_REPO: venkatsagiraju/Buildcounter
+  #BUILD_COUNTER_BRANCH: Init
+  #BUILD_COUNTER_FILE: counter.txt
+  #VERSION: 2022.4.3
  
 jobs:
   my_job:
@@ -24,41 +26,9 @@ jobs:
         uses: actions/checkout@v2
  
       - name: Read build counter
-        id: read-counter 
-        run: |
-          $filePath = "${{ env.BUILD_COUNTER_FILE }}"
-          if (Test-Path $filePath) {
-            $lastBuildCounter = Get-Content $filePath
-          } else {
-            $lastBuildCounter = 0
-          }
-          Write-Host "::set-output name=last_build_counter::$lastBuildCounter"
+        id: read-counter
+        run: |    
+         curl -H "Authorization: token ${TOKEN}" https://github.com/venkatsagiraju/Buildcounter/blob/Init/counter.txt 
+
  
-      - name: Increment build counter
-        id: increment-counter 
-        run: |
-          $newBuildCounter = ${{ steps.read-counter.outputs.last_build_counter }} + 1
-          $newVersion = "$($version).$newBuildCounter"
-          $filePath = "${{ env.BUILD_COUNTER_FILE }}"
-          Set-Content -Path $filePath -Value $newBuildCounter
-          Write-Host "::set-output name=new_version::$newVersion"
- 
-      - name: Checkout build counter repo
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ env.BUILD_COUNTER_REPO }}
-          ref: ${{ env.BUILD_COUNTER_BRANCH }}
-          path: build-counter
- 
-      - name: Commit and push build counter changes
-        run: |
-          git config user.name "venkatsagiraju"
-          git config user.email "venkat_sagiraju@trimble.com"
-          git add $filePath
-          git commit -m "Increment build counter [skip ci]"
-          git push
-          echo "${{ env.VERSION }}"
- 
-      - name: Print Build counter
-        run: |
-          echo "Build Counter:"${{ env.VERSION }}"${{ steps.increment-counter.outputs.new_version }}"
+     
