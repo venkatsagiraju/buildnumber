@@ -17,6 +17,6 @@ jobs:
     - name: Trigger downstream workflow
       uses: peter-evans/repository-dispatch@v1
       with:
-        token: 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
+        Token: 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
         repository: venkatsagiraju/Buildcounter
         event-type: start-downstream-workflow
