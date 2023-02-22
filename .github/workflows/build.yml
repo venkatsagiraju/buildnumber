@@ -35,7 +35,7 @@ jobs:
           Write-Host "::set-output name=last_build_counter::$lastBuildCounter"
  
       - name: Increment build counter
-        id: increment-counter
+        id: increment-counter 
         run: |
           $newBuildCounter = ${{ steps.read-counter.outputs.last_build_counter }} + 1
           $newVersion = "$($version).$newBuildCounter"
