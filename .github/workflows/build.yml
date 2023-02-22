@@ -27,7 +27,7 @@ jobs:
  
       - name: Read build counter
         id: read-counter
-        run: |    
+      - run: |
          curl -H "Authorization: token ${TOKEN}" https://github.com/venkatsagiraju/Buildcounter/blob/Init/counter.txt 
 
  
