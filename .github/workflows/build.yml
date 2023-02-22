@@ -2,8 +2,8 @@ name: Buildcounter
  
 on: push
  
-env:    
-  TOKEN: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 
+env:
+  TOKEN: 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 
 
   #BUILD_COUNTER_REPO: venkatsagiraju/Buildcounter
   #BUILD_COUNTER_BRANCH: Init
@@ -17,16 +17,6 @@ jobs:
  
       - name: Clone build counter repo
         uses: actions/checkout@v2
-        with:
-          repository: ${{ env.BUILD_COUNTER_REPO }}
-          ref: ${{ env.BUILD_COUNTER_BRANCH }}
-          path: build-counter
- 
-      - name: Checkout code
-        uses: actions/checkout@v2
- 
-      - name: Read build counter
-        id: read-counter
       - run: |
          curl -H "Authorization: token ${TOKEN}" https://github.com/venkatsagiraju/Buildcounter/blob/Init/counter.txt 
 
