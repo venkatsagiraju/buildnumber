@@ -17,27 +17,19 @@ jobs:
     
   downstream:
     needs: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
+    - uses: convictional/trigger-workflow-and-wait@v1.3.0
       with:
-        node-version: '14.x'
-    - name: Trigger Workflow and Wait
-      run: |
-        curl "-X POST" `
-        "-H Authorization: token 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" `
-        "-H Accept: application/vnd.github.v3+json" `
-        "https://api.github.com/repos/venkatsagiraju/Buildcounter/actions/workflows/build2.yml/dispatches" `
-        "-d {""ref"":""main""}" `
-        sleep 10s
+        owner: venkatsagiraju
+        repo: Buildcounter
+        github_token: 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
+        workflow_file_name: build2.yml
+        ref: main
     - name: Deploy Web App
       run: |
-        echo "Deploy Web App"
-        sleep 10s
-
+       echo "Deploy Web App"
+       sleep 10s 
  
 
   my_job:
