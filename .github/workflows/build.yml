@@ -1,26 +1,41 @@
-name: Buildcounter
- 
-on: push
- 
-env:
-  TOKEN: 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 
-
-  #BUILD_COUNTER_REPO: venkatsagiraju/Buildcounter
-  #BUILD_COUNTER_BRANCH: Init
-  #BUILD_COUNTER_FILE: counter.txt
-  #VERSION: 2022.4.3
- 
+name: Build
+on:
+  push:
+    branches:
+      - main
 jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: Generate build number
+      run: |
+        $major = "2022"
+        $minor = "99"
+        $patch = "99"
+        $version = "$major.$minor.$patch"
+        Write-Host "VERSION=$version" > version.txt
+    
+  build2:
+    needs: {build}
+    runs-on: windows-latest
+    steps:  
+    - name: Trigger downstream workflow
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        Token: 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
+        repository: venkatsagiraju/Buildcounter
+        event-type: start-downstream-workflow
+        ref: main 
+ 
+
   my_job:
     runs-on: windows-latest
     steps:
- 
-      - name: Clone build counter repo
-        uses: actions/checkout@v2
-        with:
-          repository: venkatsagiraju/Buildcounter
-          ref: Init
-      - name: Read file
-        run: |
-          cat counter.txt
-     
+    - name: Clone build counter repo
+      uses: actions/checkout@v2
+      with:
+        repository: venkatsagiraju/Buildcounter
+        ref: main
+    - name: Read file
+      run: |
+        cat counter.txt
