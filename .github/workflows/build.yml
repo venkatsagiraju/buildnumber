@@ -16,13 +16,13 @@ jobs:
         Write-Host "VERSION=$version" > version.txt
     
   build2:
-    needs: {build}
+    needs: build
     runs-on: windows-latest
     steps:  
     - name: Trigger downstream workflow
       uses: peter-evans/repository-dispatch@v1
       with:
-        Token: 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
+        token: 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
         repository: venkatsagiraju/Buildcounter
         event-type: start-downstream-workflow
         ref: main 
