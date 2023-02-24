@@ -27,7 +27,7 @@ jobs:
       with:
        owner: venkatsagiraju
        repo: Buildcounter
-       github_token: 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
+       github_token: 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
        workflow_file_name: build2.yml 
        ref: main
     - name: Deploy Web App
